@@ -45,7 +45,7 @@
 
 </td><td valign="top" width="45%">
 
-<img src="https://github-readme-stats.vercel.app/api?username=ziyangliu-666&show_icons=true&theme=github_dark&hide_border=true&count_private=true&include_all_commits=true" />
+<img src="https://github-readme-stats-vert-chi-13.vercel.app/api?username=ziyangliu-666&show_icons=true&theme=github_dark&hide_border=true&count_private=true&include_all_commits=true" />
 
 <img src="https://streak-stats.demolab.com?user=ziyangliu-666&theme=github-dark&hide_border=true" />
 
