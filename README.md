@@ -4,7 +4,7 @@
 
 <table><tr><td valign="top" width="58%">
 
-<p>Hi, I am <a href="https://ziy.bio/">Ziyang</a>. Singapore, <a href="https://www.nus.edu.sg/">NUS</a>.</p>
+<p>Hi, I am <a href="https://ziy.bio/">Ziyang</a> 👋 I live in Singapore, where I am doing a master's in software engineering at <a href="https://www.nus.edu.sg/">NUS</a>.</p>
 
 <p>I build low-level, low-latency systems, and quant infra is where that leads me. Current project: <a href="https://github.com/ziyangliu-666/FastMM">FastMM</a>, a C++20 market-making engine with backtesting, deterministic replay, and pre-trade risk checks.</p>
 
