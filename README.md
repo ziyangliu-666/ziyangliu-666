@@ -6,7 +6,7 @@
 
 <p>Hi, I am <a href="https://ziy.bio/">Ziyang</a> 👋 I live in Singapore, where I am doing a master's in software engineering at <a href="https://www.nus.edu.sg/">NUS</a>.</p>
 
-<p>I build low-level, low-latency systems, and quant infra is where that leads me. Current project: <a href="https://github.com/ziyangliu-666/FastMM">FastMM</a>, a C++20 market-making engine with backtesting, deterministic replay, and pre-trade risk checks.</p>
+<p>I build low-level, low-latency systems, and quant infra is where that leads me. Market-making systems interest me most, so I am building <a href="https://github.com/ziyangliu-666/FastMM">FastMM</a>, a C++20 market-making engine with backtesting, deterministic replay, and pre-trade risk checks.</p>
 
 <p>Before that: three years of virtualization at <a href="https://www.smartx.com/">SmartX</a>, leading <a href="https://www.smartx.com/hk-mo/migration-tool/">V2V OS</a> and rebuilding <a href="https://www.smartx.com/blog/2025/11/elf-vmtools-en/">VMTools</a>. Then a year of LLM systems research at <a href="https://www.hkust-gz.edu.cn/">HKUST (Guangzhou)</a>.</p>
 
