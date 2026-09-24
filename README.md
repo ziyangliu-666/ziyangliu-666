@@ -68,14 +68,6 @@ A long chat outgrows the context window and the model forgets. It does not signa
 <p><b><a href="https://arxiv.org/pdf/2604.18170v1">Copy-as-decode</a></b><br>
 When a model edits a file it retypes every unchanged line, token by token. Instead it names the lines to copy, and one parallel step splices them into the KV cache; a grammar guarantees the copy is accepted. Unchanged text is 74 to 98% of a typical edit, so the speedup is bounded at 13x.</p>
 
-### Under review, NeurIPS 2026
-
-<p><b>VidTide</b>, a living benchmark for AI-generated video detection.<br>
-Refreshed every month from real platform video, so detectors cannot overfit it. Seven published detectors lose 31 AUROC points on average against it.</p>
-
-<p><b>FOVEA</b>, neuro-symbolic forensic reasoning for video detection.<br>
-A vision-language model plans the forensic hypotheses and classical computer-vision tools test them, with no task training. 97.39% accuracy on ten unseen video generators.</p>
-
 <p align="center">
 <a href="https://ziy.bio/"><img alt="Website" src="https://img.shields.io/badge/ziy.bio-111827?style=flat-square&amp;logo=vercel&amp;logoColor=white"></a>
 <a href="https://www.linkedin.com/in/ziyang-liu-22615823b/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&amp;logo=linkedin&amp;logoColor=white"></a>
