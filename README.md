@@ -47,8 +47,6 @@
 
 ## Research
 
-Preprints with collaborators at ETH Zürich and HKUST (Guangzhou).
-
 ### Math
 
 <p><b><a href="https://zenodo.org/records/22537929">An arithmetic defect beyond the symplectic trace wall</a></b><br>
