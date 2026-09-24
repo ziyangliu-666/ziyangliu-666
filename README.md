@@ -47,20 +47,34 @@
 
 ## Research
 
+Preprints with collaborators at ETH Zürich and HKUST (Guangzhou).
+
 ### Math
 
-<table><tr>
-<td valign="top" width="50%"><p><b><a href="https://zenodo.org/records/22537929">Beyond the symplectic trace wall</a></b><br>Shows that a predicted pattern in number theory has an extra arithmetic correction.</p></td>
-<td valign="top" width="50%"><p><b><a href="https://zenodo.org/records/22537927">Prime number races</a></b><br>Calculates how often five groups of primes take the lead and studies errors in counting primes.</p></td>
-</tr></table>
+<p><b><a href="https://zenodo.org/records/22537929">An arithmetic defect beyond the symplectic trace wall</a></b><br>
+Random matrix theory predicts how a family of L-functions behaves on average, and the prediction was expected to hold past a known threshold. It does not: at distance three the average carries an arithmetic correction of 2/q³ + O(q⁻⁴), which rules out the conjectured saturation. Includes a rigorous interval computation at q = 3.</p>
+
+<p><b><a href="https://zenodo.org/records/22537927">Two problems in comparative prime number theory</a></b><br>
+Primes fall into remainder classes, and a prime race asks which class is in the lead most of the time. Settles two open problems posed by Hamieh, Kadiri, Martin and Ng: all 120 lead frequencies in the five-way race modulo 11, which fall into eight strictly ordered symmetry classes with rigorous error bounds, and the point past which the running error in counting primes stays negative. Conditional on GRH.</p>
 
 ### LLM systems
 
-<table><tr>
-<td valign="top" width="33%"><p><b><a href="https://arxiv.org/pdf/2604.18179v1">Verify a hosted model</a></b><br>Uses committed feature traces to check whether an AI service ran the model it advertised.</p></td>
-<td valign="top" width="33%"><p><b><a href="https://arxiv.org/pdf/2604.12376v1">Remember long conversations</a></b><br>Leaves short bookmarks so an assistant can fetch older details when it needs them.</p></td>
-<td valign="top" width="33%"><p><b><a href="https://arxiv.org/pdf/2604.18170v1">Edit without rewriting</a></b><br>Lets a model copy unchanged text efficiently while generating only the edits.</p></td>
-</tr></table>
+<p><b><a href="https://arxiv.org/pdf/2604.18179v1">Committed SAE-feature traces</a></b><br>
+An API claims to run a given model, and its answers alone cannot prove it. Each answer now carries a fingerprint of the model's internal features, committed to a Merkle root before anyone asks to check. Caught all 17 cheaper substitutes across three model families at under 2.1% overhead.</p>
+
+<p><b><a href="https://arxiv.org/pdf/2604.12376v1">Cooperative memory paging</a></b><br>
+A long chat outgrows the context window and the model forgets. It does not signal the gap either: it answers more confidently without the fact. Each dropped section leaves an 8-token bookmark, and a recall tool fetches the full text back. Beats five methods on LoCoMo, with four LLM judges agreeing at p = 0.017.</p>
+
+<p><b><a href="https://arxiv.org/pdf/2604.18170v1">Copy-as-decode</a></b><br>
+When a model edits a file it retypes every unchanged line, token by token. Instead it names the lines to copy, and one parallel step splices them into the KV cache; a grammar guarantees the copy is accepted. Unchanged text is 74 to 98% of a typical edit, so the speedup is bounded at 13x.</p>
+
+### Under review, NeurIPS 2026
+
+<p><b>VidTide</b>, a living benchmark for AI-generated video detection.<br>
+Refreshed every month from real platform video, so detectors cannot overfit it. Seven published detectors lose 31 AUROC points on average against it.</p>
+
+<p><b>FOVEA</b>, neuro-symbolic forensic reasoning for video detection.<br>
+A vision-language model plans the forensic hypotheses and classical computer-vision tools test them, with no task training. 97.39% accuracy on ten unseen video generators.</p>
 
 <p align="center">
 <a href="https://ziy.bio/"><img alt="Website" src="https://img.shields.io/badge/ziy.bio-111827?style=flat-square&amp;logo=vercel&amp;logoColor=white"></a>
