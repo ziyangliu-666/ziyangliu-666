@@ -4,13 +4,11 @@
 
 <table><tr><td valign="top" width="58%">
 
-<p>Hi, I am <a href="https://ziy.bio/">Ziyang</a> 👋 I live in Singapore, where I am doing a master's in software engineering at <a href="https://www.nus.edu.sg/">NUS</a>.</p>
+<p>Hi, I'm <a href="https://ziy.bio/">Ziyang</a> 👋 I'm doing a master's in software engineering at <a href="https://www.nus.edu.sg/">NUS</a> in Singapore.</p>
 
-<p>I build low-level, low-latency systems, and quant infra is where that leads me. Market-making systems interest me most, so I am building <a href="https://github.com/ziyangliu-666/FastMM">FastMM</a>, a C++20 market-making engine with backtesting, deterministic replay, and pre-trade risk checks.</p>
+<p>I spent three years at <a href="https://www.smartx.com/">SmartX</a>, working on <a href="https://www.smartx.com/hk-mo/migration-tool/">V2V OS</a> and <a href="https://www.smartx.com/blog/2025/11/elf-vmtools-en/">VMTools</a>. These days, I'm building <a href="https://github.com/ziyangliu-666/FastMM">FastMM</a>, a C++20 market-making engine.</p>
 
-<p>Before that: three years of virtualization at <a href="https://www.smartx.com/">SmartX</a>, leading <a href="https://www.smartx.com/hk-mo/migration-tool/">V2V OS</a> and rebuilding <a href="https://www.smartx.com/blog/2025/11/elf-vmtools-en/">VMTools</a>. Then a year of LLM systems research at <a href="https://www.hkust-gz.edu.cn/">HKUST (Guangzhou)</a>.</p>
-
-<p>Lately I let agents do the typing and follow where they lead, mostly into <a href="https://github.com/ziyangliu-666/paperstack">autonomous research</a> and whatever seems worth building.</p>
+<p>For fun, I’ve been using agents to autoresearch a few papers. It’s been a fun rabbit hole! Take a look at some of my work below 👇</p>
 
 <p><b>Languages</b><br>
 <img alt="C++" src="https://img.shields.io/badge/C++-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white">
