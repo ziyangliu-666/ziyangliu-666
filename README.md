@@ -1,8 +1,6 @@
 <div align="center">
-<img src="https://readme-typing-svg.demolab.com?font=Noto+Serif+SC&amp;weight=600&amp;size=32&amp;duration=2400&amp;pause=1200&amp;color=79B8FF&amp;center=true&amp;vCenter=true&amp;width=800&amp;height=64&amp;lines=Ziyang+Liu+%E5%88%98%E5%AD%90%E9%98%B3;Taste+is+the+last+thing+to+automate" alt="ZIYANG LIU · 刘子阳">
+<img src="assets/intro.webp" width="100%" alt="Anime-style intro: a stick figure with a red scarf runs through UESTC, ByteDance, SmartX (10,000+ VMs migrated), flies to NUS in Singapore, builds FastMM, and sends agents out for papers.">
 </div>
-
-<table><tr><td valign="top" width="58%">
 
 <p>Hi, I'm <a href="https://ziy.bio/">Ziyang</a> 👋 I'm doing a master's in software engineering at <a href="https://www.nus.edu.sg/">NUS</a> in Singapore.</p>
 
@@ -37,16 +35,17 @@
 <a href="https://www.linkedin.com/in/ziyang-liu-22615823b/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white"></a>
 <a href="mailto:ziyang.liu.r@outlook.com"><img alt="Email" src="https://img.shields.io/badge/Email-0078D4?style=for-the-badge&amp;logo=microsoftoutlook&amp;logoColor=white"></a></p>
 
-</td><td valign="top" width="42%">
+<p align="center">
+<img width="467" alt="GitHub statistics" src="https://github-readme-stats-vert-chi-13.vercel.app/api?username=ziyangliu-666&amp;show_icons=true&amp;theme=github_dark&amp;hide_border=true&amp;count_private=true&amp;include_all_commits=true">
+<img width="300" alt="Most used languages" src="https://github-readme-stats-vert-chi-13.vercel.app/api/top-langs?username=ziyangliu-666&amp;hide=html&amp;layout=compact&amp;theme=github_dark&amp;hide_border=true&amp;langs_count=8">
+</p>
 
-<img width="100%" alt="GitHub statistics" src="https://github-readme-stats-vert-chi-13.vercel.app/api?username=ziyangliu-666&amp;show_icons=true&amp;theme=github_dark&amp;hide_border=true&amp;count_private=true&amp;include_all_commits=true">
+## Featured
 
-<p><b>Featured</b></p>
-
-<a href="https://github.com/ziyangliu-666/FastMM"><img width="100%" alt="FastMM repository" src="https://github-readme-stats-vert-chi-13.vercel.app/api/pin?username=ziyangliu-666&amp;repo=FastMM&amp;theme=github_dark&amp;hide_border=true"></a>
-<a href="https://github.com/ziyangliu-666/paperstack"><img width="100%" alt="paperstack repository" src="https://github-readme-stats-vert-chi-13.vercel.app/api/pin?username=ziyangliu-666&amp;repo=paperstack&amp;theme=github_dark&amp;hide_border=true"></a>
-
-</td></tr></table>
+<p align="center">
+<a href="https://github.com/ziyangliu-666/FastMM"><img width="400" alt="FastMM repository" src="https://github-readme-stats-vert-chi-13.vercel.app/api/pin?username=ziyangliu-666&amp;repo=FastMM&amp;theme=github_dark&amp;hide_border=true"></a>
+<a href="https://github.com/ziyangliu-666/paperstack"><img width="400" alt="paperstack repository" src="https://github-readme-stats-vert-chi-13.vercel.app/api/pin?username=ziyangliu-666&amp;repo=paperstack&amp;theme=github_dark&amp;hide_border=true"></a>
+</p>
 
 ## Research
 
