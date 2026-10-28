@@ -32,6 +32,11 @@
 <img alt="LaTeX" src="https://img.shields.io/badge/LaTeX-008080?style=flat-square&amp;logo=latex&amp;logoColor=white">
 <img alt="arXiv" src="https://img.shields.io/badge/arXiv-B31B1B?style=flat-square&amp;logo=arxiv&amp;logoColor=white"></p>
 
+<p><b>Find me</b><br>
+<a href="https://ziy.bio/"><img alt="Website" src="https://img.shields.io/badge/ziy.bio-111827?style=for-the-badge&amp;logo=vercel&amp;logoColor=white"></a>
+<a href="https://www.linkedin.com/in/ziyang-liu-22615823b/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white"></a>
+<a href="mailto:ziyang.liu.r@outlook.com"><img alt="Email" src="https://img.shields.io/badge/Email-0078D4?style=for-the-badge&amp;logo=microsoftoutlook&amp;logoColor=white"></a></p>
+
 </td><td valign="top" width="42%">
 
 <img width="100%" alt="GitHub statistics" src="https://github-readme-stats-vert-chi-13.vercel.app/api?username=ziyangliu-666&amp;show_icons=true&amp;theme=github_dark&amp;hide_border=true&amp;count_private=true&amp;include_all_commits=true">
@@ -60,9 +65,3 @@
 <p><b><a href="https://zenodo.org/records/22537929">Where random matrix theory misses arithmetic</a></b></p>
 
 <p><b><a href="https://zenodo.org/records/22537927">Two open problems in prime races, solved</a></b></p>
-
-<p align="center">
-<a href="https://ziy.bio/"><img alt="Website" src="https://img.shields.io/badge/ziy.bio-111827?style=flat-square&amp;logo=vercel&amp;logoColor=white"></a>
-<a href="https://www.linkedin.com/in/ziyang-liu-22615823b/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&amp;logo=linkedin&amp;logoColor=white"></a>
-<a href="mailto:ziyang.liu.r@outlook.com"><img alt="Email" src="https://img.shields.io/badge/Email-0078D4?style=flat-square&amp;logo=microsoftoutlook&amp;logoColor=white"></a>
-</p>
