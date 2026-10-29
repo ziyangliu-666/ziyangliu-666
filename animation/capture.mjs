@@ -10,7 +10,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const [outDir = "frames", fps = "20", ...times] = process.argv.slice(2);
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const PORT = 9333;
-const W = 880, H = 385, DURATION = 21;
+const W = 880, H = 385, DURATION = 25.8;
 
 mkdirSync(outDir, { recursive: true });
 const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, "--hide-scrollbars",

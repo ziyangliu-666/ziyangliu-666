@@ -14,7 +14,7 @@
 <body>
 <canvas id="cv" width="880" height="385"></canvas>
 <script>
-const W = 880, H = 385, DURATION = 21, FPS = 12;
+const W = 880, H = 385, DURATION = 25.8, FPS = 12;
 const ctx = document.getElementById("cv").getContext("2d");
 
 const DISPLAY = "'Avenir Next Condensed', 'Futura', sans-serif";
@@ -278,14 +278,14 @@ function rack(x, label, color, fill) {
   ctx.fillStyle = color; ctx.font = font(22); ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.fillText(label, x, 58);
 }
 
-function bot(x, y, s, ph, carrying) {
+function bot(x, y, s, ph, carrying, color = C.cyan) {
   // A small agent robot: box head, antenna, stick legs.
   ctx.save(); ctx.translate(x, y); ctx.lineCap = "round";
   const b = Math.abs(Math.sin(ph)) * 4;
   ctx.strokeStyle = C.ink; ctx.lineWidth = 4 * s;
   ctx.beginPath(); ctx.moveTo(-6 * s, -2); ctx.lineTo(-6 * s + Math.sin(ph) * 6, 0); ctx.moveTo(6 * s, -2); ctx.lineTo(6 * s - Math.sin(ph) * 6, 0); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(-6 * s, -18 * s); ctx.lineTo(-6 * s + Math.sin(ph) * 6, 0); ctx.moveTo(6 * s, -18 * s); ctx.lineTo(6 * s - Math.sin(ph) * 6, 0); ctx.stroke();
-  ctx.fillStyle = C.cyan; ctx.strokeStyle = C.ink; ctx.lineWidth = 3;
+  ctx.fillStyle = color; ctx.strokeStyle = C.ink; ctx.lineWidth = 3;
   roundRect(-16 * s, -48 * s - b, 32 * s, 30 * s, 6); ctx.fill(); ctx.stroke();
   ctx.fillStyle = C.ink; ctx.fillRect(-8 * s, -38 * s - b, 5 * s, 5 * s); ctx.fillRect(4 * s, -38 * s - b, 5 * s, 5 * s);
   ctx.beginPath(); ctx.moveTo(0, -48 * s - b); ctx.lineTo(0, -58 * s - b); ctx.stroke();
@@ -527,30 +527,156 @@ const SCENES = [
         ctx.font = `700 10px ${MONO}`; ctx.fillStyle = "#c8d2ee"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillText(l, x + 2, y + 18); });
     flash(t, .9, .5);
   }},
-  { from: 17.0, to: 19.4, draw: (t, g) => {      // Research: he sends agents out, they bring papers back
+  { from: 17.0, to: 24.2, draw: (t, g) => {      // Research: he sets the question, agents run, code and write, he reviews
     sky("#2b1656", "#2b1656");
     halftone("#ffffff", .07);
-    ground(320, "#2a1652", C.pink);
-    stick(120, 320, 1.1, t < .5 ? POSE.stand() : POSE.point(), { t, glow: t > .5 ? C.pink : null });
-    for (let i = 0; i < 3; i++) {
-      const k = prog(t, .45 + i * .12, .9);
-      if (k <= 0) continue;
-      const back = k > .55;
-      const x = back ? lerp(420, 210 + i * 50, (k - .55) / .45) : lerp(180, 420, k / .55);
-      bot(x, 320, 1, t * 18 + i, back ? [C.cyan, C.pink, C.yellow][i] : null);
+    const fr = Math.floor(g * FPS);
+    const BOT_COLORS = [C.cyan, C.green, C.pink];
+    if (t < 1.0) {
+      // He gives the task; three agents pop out.
+      ground(320, "#22114a", C.pink);
+      stick(150, 320, 1.1, t < .25 ? POSE.stand() : POSE.point(), { t, glow: t > .25 ? C.pink : null });
+      const bp = prog(t, .1, .3);
+      if (bp > 0) {
+        ctx.save(); ctx.translate(300, 120); ctx.scale(backOut(bp), backOut(bp));
+        ctx.fillStyle = C.white; ctx.strokeStyle = C.ink; ctx.lineWidth = 4;
+        roundRect(-10, -34, 420, 56, 12); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(20, 22); ctx.lineTo(-40, 70); ctx.lineTo(50, 22); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = C.white; ctx.fillRect(22, 18, 26, 8);
+        ctx.fillStyle = C.ink; ctx.font = `800 15px ${MONO}`; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        const msg = "> autoresearch: find a gap,", msg2 = "  test it, write it up";
+        const n = Math.floor(prog(t, .2, .5) * (msg.length + msg2.length));
+        ctx.fillText(msg.slice(0, n), 4, -16); ctx.fillText(msg2.slice(0, Math.max(0, n - msg.length)), 4, 6);
+        ctx.restore();
+      }
+      for (let i = 0; i < 3; i++) {
+        const p = prog(t, .5 + i * .12, .25);
+        if (p <= 0) continue;
+        ctx.save(); ctx.translate(450 + i * 110, 320); ctx.scale(backOut(p), backOut(p));
+        bot(0, 0, 1.2, t * 10 + i, null, BOT_COLORS[i]);
+        ctx.restore();
+        sfx("POP", 450 + i * 110, 230, BOT_COLORS[i], prog(t, .5 + i * .12, .45), -10, 22);
+      }
+      ctx.fillStyle = C.pink; ctx.fillRect(18, 22, 128, 20);
+      ctx.fillStyle = C.ink; ctx.font = `800 12px ${MONO}`; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillText("EP.5  RESEARCH", 24, 37);
+    } else if (t < 3.9) {
+      // Three manga panels, one agent each.
+      const tb = t - 1.0;
+      const panel = (pts, bg, at, dir, tag, color, draw) => {
+        const p = prog(tb, at, .3);
+        if (p <= 0) return;
+        ctx.save(); ctx.translate((1 - easeOut(p)) * dir * 500, 0);
+        ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath();
+        ctx.save(); ctx.clip(); ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H); draw(); ctx.restore();
+        ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.stroke();
+        const tx = pts[0][0] + 12;
+        ctx.fillStyle = color; ctx.font = `800 11px ${MONO}`; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+        ctx.fillRect(tx - 4, 26, ctx.measureText(tag).width + 8, 18); ctx.fillStyle = C.ink; ctx.fillText(tag, tx, 39);
+        ctx.restore();
+      };
+      // Panel 1: experiments.
+      panel([[18, 18], [302, 18], [276, 300], [18, 300]], "#0f2236", 0, -1, "AGENT 01 · RUNS EXPERIMENTS", C.cyan, () => {
+        const k = prog(tb, .3, 2.3);
+        ctx.strokeStyle = "#3d5a7a"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(110, 60); ctx.lineTo(110, 200); ctx.lineTo(270, 200); ctx.stroke();
+        ctx.strokeStyle = C.cyan; ctx.lineWidth = 3; ctx.beginPath();
+        const N = Math.max(2, Math.floor(k * 40));
+        for (let i = 0; i < N; i++) {
+          const x = i / 39, y = 70 + 115 * (1 - Math.exp(-3.2 * x)) + (hash(i * 7) - .5) * 14;
+          i ? ctx.lineTo(112 + x * 155, y) : ctx.moveTo(112 + x * 155, y);
+        }
+        ctx.stroke();
+        ctx.fillStyle = "#8fb4dd"; ctx.font = `700 10px ${MONO}`; ctx.textAlign = "left"; ctx.fillText("LOSS", 114, 72);
+        ctx.fillStyle = C.white; ctx.font = font(22); ctx.fillText(`RUN #${1 + Math.floor(k * 36)}`, 150, 232);
+        for (let i = 0; i < 4; i++) {                // GPU load bars
+          const u = .6 + .4 * hash(i + fr);
+          ctx.fillStyle = "#1d3754"; ctx.fillRect(30, 70 + i * 26, 60, 14);
+          ctx.fillStyle = u > .9 ? C.yellow : C.cyan; ctx.fillRect(30, 70 + i * 26, 60 * u, 14);
+          ctx.fillStyle = "#8fb4dd"; ctx.font = `700 9px ${MONO}`; ctx.fillText(`GPU${i}`, 30, 66 + i * 26);
+        }
+        bot(60, 290, 1.1, t * 12, null);
+      });
+      // Panel 2: code.
+      panel([[312, 18], [594, 18], [568, 300], [286, 300]], "#0e1f18", .25, 1, "AGENT 02 · WRITES THE CODE", C.green, () => {
+        const scroll = tb * 70;
+        for (let i = 0; i < 16; i++) {
+          const y = 64 + ((i * 16 - scroll) % 256 + 256) % 256;
+          if (y > 220) continue;
+          const ind = (Math.floor(hash(i * 3) * 3)) * 14;
+          ctx.fillStyle = [C.green, C.cyan, C.yellow, "#c9d6cf"][i % 4];
+          ctx.fillRect(330 + ind, y, 40 + hash(i * 11) * 120, 6);
+        }
+        const passed = Math.min(42, Math.floor(prog(tb, .6, 2.0) * 42));
+        ctx.fillStyle = passed === 42 ? C.green : C.white; ctx.font = font(20); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+        ctx.fillText(`TESTS ${passed}/42 ${passed === 42 ? "PASSED" : "…"}`, 360, 252);
+        bot(330, 290, 1.1, t * 22, null, C.green);
+        sfx("TAKATAK", 470, 285, C.green, prog(tb, .4, 1.6), -6, 20);
+      });
+      // Panel 3: paper.
+      panel([[604, 18], [862, 18], [862, 300], [578, 300]], "#2a1840", .5, 1, "AGENT 03 · WRITES THE PAPER", C.pink, () => {
+        const k = prog(tb, .8, 1.9);
+        ctx.fillStyle = C.ink; ctx.fillRect(690, 56, 150, 200);
+        ctx.fillStyle = "#fbfbff"; ctx.fillRect(684, 50, 150, 200);
+        ctx.fillStyle = C.ink; ctx.fillRect(700, 62, 118 * clamp(k * 4), 8);
+        const lines = Math.floor(k * 14);
+        for (let i = 0; i < lines; i++) {
+          if (i >= 5 && i < 9) continue;            // room for the figure
+          ctx.fillStyle = "#b9bfd2"; ctx.fillRect(696, 80 + i * 11, 126 - (i % 4) * 14, 4);
+        }
+        if (lines > 6) {                              // a small figure and an equation
+          ctx.strokeStyle = C.pink; ctx.lineWidth = 2; ctx.beginPath();
+          for (let i = 0; i <= 10; i++) ctx.lineTo(700 + i * 6, 162 - 30 * (1 - Math.exp(-i / 3)));
+          ctx.stroke();
+          ctx.fillStyle = C.ink; ctx.font = `italic 700 13px Georgia, serif`; ctx.textAlign = "left"; ctx.fillText("∑ᵢ ∇ℒ(θ)", 768, 150);
+        }
+        if (k >= 1) stamp(760, 225, "DRAFT v3", C.pink, prog(tb, 2.75, .15), -10, 16);
+        bot(640, 290, 1.1, t * 8, null, C.pink);
+      });
+      // Under the panels: him, watching every result.
+      ctx.fillStyle = C.ink; ctx.fillRect(0, 304, W, 67);
+      stick(52, 368, .55, { lean: -4, aL: [35, 105], aR: [35, 95], lL: [-18, 0], lR: [18, 0] }, { t });
+      ctx.fillStyle = C.white; ctx.font = `800 13px ${MONO}`; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      ctx.fillText("ZIYANG: SETS THE QUESTION · REVIEWS EVERY RESULT", 96, 344);
+      ctx.fillStyle = C.pink; ctx.font = `700 11px ${MONO}`;
+      ctx.fillText("AGENTS: RUN THE EXPERIMENTS · WRITE THE CODE · DRAFT THE PAPER", 96, 362);
+    } else {
+      // He reviews the draft, then the papers land.
+      const tc = t - 3.9;
+      ground(320, "#22114a", C.pink);
+      stick(140, 320, 1.1, { lean: 4, aL: [70, 40], aR: [80, 30], lL: [-12, 0], lR: [14, 0] }, { t });
+      paper(196, 220, .5, rad(-8), C.pink, "DRAFT");
+      sfx("REVIEWED ✓", 160, 110, C.green, prog(tc, .05, 1.2), -8, 30);
+      for (let i = 0; i < 3; i++) {
+        const hop = Math.abs(Math.sin(t * 9 + i)) * 18;
+        bot(290 + i * 60, 320 - hop, 1, t * 14 + i, null, BOT_COLORS[i]);
+      }
+      const PAPERS = [["ARXIV", C.cyan], ["ARXIV", C.cyan], ["ARXIV", C.cyan], ["ICLR", C.pink], ["ICLR", C.pink], ["ICLR", C.pink], ["MATH", C.yellow], ["MATH", C.yellow], ["MATH", C.yellow]];
+      PAPERS.forEach(([lab, c], i) => {
+        // One paper at a time, slow enough to read, and each column gets its label once full.
+        const at = .7 + i * .17 + Math.floor(i / 3) * .15;
+        const p = prog(tc, at, .35);
+        if (p <= 0) return;
+        const col = Math.floor(i / 3), row = i % 3;
+        const tx = 520 + col * 120 + row * 14, ty = 72 + row * 26;
+        paper(lerp(tx + 300, tx, easeOut(p)), lerp(-120, ty, easeOut(p)), .62, rad(lerp(80, -6 + row * 5, easeOut(p))), c, lab);
+        if (row === 2) {
+          const lp = prog(tc, at + .3, .25);
+          if (lp > 0) {
+            const lx = 534 + col * 120;
+            ctx.save(); ctx.globalAlpha = lp; ctx.fillStyle = c; ctx.fillRect(lx - 52, 196, 104, 32);
+            ctx.fillStyle = C.ink; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+            ctx.font = `900 12px ${MONO}`; ctx.fillText(["LLM SYSTEMS", "ICLR 2027", "MATH"][col], lx, 210);
+            ctx.font = `700 9px ${MONO}`; ctx.fillText(["ARXIV", "UNDER REVIEW", "ZENODO"][col], lx, 223);
+            ctx.restore();
+          }
+        }
+      });
+      stamp(720, 270, "9 PAPERS", C.yellow, prog(tc, 2.75, .25), -8, 30);
+      caption(tc, .1, "EP.5  RESEARCH", "AGENTS AS RESEARCH PARTNERS", "3 LLM SYSTEMS · 3 ICLR 2027 SUBMISSIONS · 3 MATH", C.pink);
     }
-    const PAPERS = [["ARXIV", C.cyan], ["ARXIV", C.cyan], ["ARXIV", C.cyan], ["ICLR", C.pink], ["ICLR", C.pink], ["ICLR", C.pink], ["MATH", C.yellow], ["MATH", C.yellow], ["MATH", C.yellow]];
-    PAPERS.forEach(([lab, c], i) => {
-      const p = prog(t, 1.0 + i * .06, .35);
-      if (p <= 0) return;
-      const col = Math.floor(i / 3), row = i % 3;
-      const tx = 520 + col * 120 + row * 14, ty = 80 + row * 30;
-      paper(lerp(tx + 300, tx, easeOut(p)), lerp(-120, ty, easeOut(p)), .62, rad(lerp(80, -6 + row * 5, easeOut(p))), c, lab);
-    });
-    stamp(720, 250, "9 PAPERS", C.yellow, prog(t, 1.75, .2), -8, 30);
-    caption(t, .2, "EP.5  RESEARCH", "AGENTS AS RESEARCH PARTNERS", "3 LLM SYSTEMS · 3 ICLR 2027 SUBMISSIONS · 3 MATH", C.pink);
+    flash(t, 1.0, .5); flash(t, 3.9, .5);
   }},
-  { from: 19.4, to: 21.0, draw: (t, g) => {      // Finale: silhouette at sunset
+  { from: 24.2, to: 25.8, draw: (t, g) => {      // Finale: silhouette at sunset
     sky("#ff6b4a", "#2a0f3a");
     radialLines(440, 230, 50, "#ffd9a0", Math.floor(g * FPS / 2), 120, .35);
     sun(440, 240, 120, "#fff1c2", "#ff8a4a");
